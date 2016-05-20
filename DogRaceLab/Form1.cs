@@ -23,7 +23,7 @@ namespace DogRaceLab {
             // initialize the guys array
             guys[0] = new Guy() { name = "Joe", cash = 50, myLabel = joeBetLabel, myRadioButton = joeRadioButton, myBet = new Bet() };
             guys[1] = new Guy() { name = "Bob", cash = 50, myLabel = bobBetLabel, myRadioButton = bobRadioButton, myBet = new Bet() };
-            guys[2] = new Guy() { name = "Al", cash = 50, myLabel = halBetLabel, myRadioButton = halRadioButton, myBet = new Bet() };
+            guys[2] = new Guy() { name = "Al", cash = 15, myLabel = halBetLabel, myRadioButton = halRadioButton, myBet = new Bet() };
 
             // and update their labels
             for (int i = 0; i < guys.Length; i++) {
@@ -127,8 +127,11 @@ namespace DogRaceLab {
                         }
                     } else {
                         for (int j = 0; j < guys.Length; j++) {
-                            guys[j].UpdateLabels();
-
+                            if (guys[j].cash < guys[j].myBet.amount) { // logic to prevent a rebet when there's insufficient cash
+                                MessageBox.Show(guys[j].name + " doesn't have enough cash to repeat the bet, removing it!");  // going to "go for broke" would be better here...
+                                guys[j].ClearBet();
+                            }
+                            guys[j].UpdateLabels();                  
                         }
                     }
 

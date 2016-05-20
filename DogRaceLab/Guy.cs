@@ -25,6 +25,9 @@ namespace DogRaceLab {
             } else {
                 myLabel.Text=name + " bets $" + myBet.amount + " on dog #" + myBet.dog;
             }
+            if (cash == 0) {
+                myLabel.Text = "Bankrupt!";
+            }
         }
 
         public void ClearBet() {  // reset guy's bet to zero
